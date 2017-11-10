@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="assets/css/croppic.css" rel="stylesheet">
+</head>
+<body>
+<img width="80px" src="http://mvimg10.meitudata.com/59eef4fbe50427774.png" id="update-avatar-1"/>
+<br/>
+<img width="80px" src="http://mvimg10.meitudata.com/59eef4fbe50427774.png" id="update-avatar-2"/>
+
+
+<div id="croppic-1" style="display: none;"></div>
+<div id="croppic-2" style="display: none;"></div>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="croppic.min.js"></script>
+<!--<script src="assets/js/main.js"></script>-->
+<script>
+  for (var iii = 1; iii <= 2; iii++) {
+    var croppicHeaderOptions = {
+      uploadUrl: 'img_save_to_file.php',
+      cropData: {
+        "dummyData": 1,
+        "dummyData2": "asdas"
+      },
+      cropUrl: 'img_crop_to_file.php',
+      customUploadButtonId: 'update-avatar-' + iii,
+      modal: true,
+      loaderHtml: '<div class="loader bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div> ',
+      onBeforeImgUpload: function () {
+        console.log('onBeforeImgUpload')
+      },
+      onAfterImgUpload: function () {
+        console.log('onAfterImgUpload')
+      },
+      onImgDrag: function () {
+        console.log('onImgDrag')
+      },
+      onImgZoom: function () {
+        console.log('onImgZoom')
+      },
+      onBeforeImgCrop: function () {
+        console.log('onBeforeImgCrop')
+      },
+      onAfterImgCrop: function () {
+        console.log('onAfterImgCrop')
+      }
+    };
+    var cropperHeader = new Croppic('croppic-' + iii, croppicHeaderOptions);
+    alert(iii);
+  }
+
+</script>
+
+</body>
+</html>
