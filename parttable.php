@@ -2,34 +2,32 @@
 /**
  * 生成分表SQL功能
  */
-$sql = "CREATE TABLE `recharge_order_others_{i}` (
-  `id` bigint(20) unsigned NOT NULL COMMENT '订单id',
-  `uid` int(11) unsigned NOT NULL COMMENT '所属用户',
-  `pay_type` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '支付方式, 1支付宝wap支付；2支付宝客户端支付',
-  `pay_order_num` varchar(64) NOT NULL DEFAULT '0' COMMENT '支付平台交易id',
-  `pay_account` varchar(128) NOT NULL DEFAULT '' COMMENT '支付账号',
-  `pay_order_status` varchar(24) NOT NULL DEFAULT '0' COMMENT '第三方支付状态',
-  `pay_time` int(11) unsigned NOT NULL COMMENT '支付时间',
-  `product_id` int(11) unsigned NOT NULL COMMENT '如：美币产品id',
-  `product_external_id` varchar(255) NOT NULL DEFAULT '' COMMENT '苹果平台产品id',
-  `amount` decimal(11,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '付款金额',
-  `exchange_rate` decimal(11,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '兑换比例',
-  `coins` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '充值的美币',
-  `coins_present` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '赠送的美币',
-  `order_status` tinyint(1) unsigned NOT NULL COMMENT '订单状态，0未付款；1已付款；2取消订单；3订单过期',
+$sql = "CREATE TABLE `catch_doll_order_{i}` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `uid` bigint(20) unsigned NOT NULL COMMENT 'uid',
+  `status` tinyint(3) NOT NULL COMMENT '状态：1已扣金币；2已完成',
+  `consume_amount` decimal(11,2) NOT NULL DEFAULT '0.00' COMMENT '消费数量',
+  `consume_present_amount` decimal(11,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '消费赠送美币数量',
+  `amount_remain` decimal(11,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '剩余额度',
+  `present_amount_remain` decimal(11,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '剩余赠送美币额度',
+  `out_trade_no` varchar(64) NOT NULL COMMENT '第三方订单号',
+  `catch_result` text NOT NULL COMMENT '抓取结果，json格式字符串',
+  `consume_at` int(11) unsigned NOT NULL COMMENT '消费时间，作为和第三方结算的时间依据',
+  `updated_at` int(11) unsigned NOT NULL COMMENT '更新时间',
   `created_at` int(11) unsigned NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`),
-  KEY `uid_status` (`uid`,`order_status`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8";
+  KEY `unq_out_trade_no` (`out_trade_no`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='抓娃娃业务'";
 $start = 0;
-$end = 128;
+$end = 16;
 $leftPad = array(1, '0');
+$leftPadLen = strlen($end);
 
 $result = '';
 for ($i = $start; $i < $end; $i++) {
     $pad = $i;
     if ($leftPad[0]) {
-        $pad = str_pad($pad, 3, $leftPad[1], STR_PAD_LEFT);
+        $pad = str_pad($pad, $leftPadLen, $leftPad[1], STR_PAD_LEFT);
     }
     $result = $result . str_replace('{i}', $pad, $sql) . ';' . PHP_EOL . PHP_EOL;
 }
