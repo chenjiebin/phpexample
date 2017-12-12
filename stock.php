@@ -4,10 +4,14 @@ $x = intval($_GET['x']); //每笔交易费用
 if (!$x) {
     die('x error');
 }
-$list = range(5000, 50000, 1000);
+
+//calc_fee(7260);
+//exit();
+
+$list = range(5000, 500000, 1000);
 foreach ($list as $_x) {
     $fee = calc_fee($_x);
-    echo $_x . ' ' . round($fee / $_x * 100, 5) . '%';
+    echo $_x . ' ' . $fee . ' ' . round($fee / $_x * 100, 5) . '%';
     echo '<br />';
 }
 
@@ -15,12 +19,15 @@ foreach ($list as $_x) {
 function calc_fee($x)
 {
     // 平台佣金 + 平台使用费 + 印花税 + 交收费 + 交易费 + 交易徵費 + 交易系統使用費
-    $fee = (($x * 0.0003) >= 3 ? ($x * 0.0003) : 3)
-        + 15
-        + ceil($x * 0.001)
-        + 2
-        + round($x * 0.00005, 2)
-        + round($x * (0.2 / 7620), 2)
-        + 0.5;
+    $fee1 = (($x * 0.0003) >= 3 ? ($x * 0.0003) : 3);
+    $fee2 = 15;
+    $fee3 = ceil($x * 0.001);
+    $fee4 = 2;
+    $fee5 = round($x * 0.00005, 2);
+    $fee6 = round($x * (0.2 / 7260), 2);
+    $fee7 = 0.5;
+    $fee = $fee1 + $fee2 + $fee3 + $fee4 + $fee5 + $fee6 + $fee7;
+//    echo "$fee1 + $fee2 + $fee3 + $fee4 + $fee5 + $fee6 + $fee7";
+//    echo '<br />';
     return $fee;
 }
