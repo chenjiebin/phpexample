@@ -5,8 +5,9 @@ if (!$x) {
     die('x error');
 }
 
-//calc_fee(7260);
-//exit();
+echo $x . ' ' . calc_fee($x) . ' ' . round(calc_fee($x) / $x * 100, 5) . '%';
+echo '<br />';
+echo '<br />';
 
 $list = range(5000, 500000, 1000);
 foreach ($list as $_x) {
