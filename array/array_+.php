@@ -1,31 +1,27 @@
 <?php
-echo '<pre>';
+/**
+ * 测试一下php中array直接用加号相加的情况
+ */
 $a = array('a', 'b');
 $b = array('c', 'b');
-var_dump($a + $b);
-var_dump(array_merge($a, $b));
+print_r($a + $b);
 
 echo PHP_EOL;
 $a = array(0 => 'a', 1 => 'b');
 $b = array(0 => 'c', 1 => 'b');
-var_dump($a + $b);
-var_dump(array_merge($a, $b));
+print_r($a + $b);
 
 echo PHP_EOL;
 $a = array('a', 'b');
 $b = array(0 => 'c', 1 => 'b');
-var_dump($a + $b);
-var_dump(array_merge($a, $b));
+print_r($a + $b);
 
 echo PHP_EOL;
 $a = array(0 => 'a', 1 => 'b');
 $b = array('0' => 'c', '1' => 'b');
-var_dump($a + $b);
-var_dump(array_merge($a, $b));
+print_r($a + $b);
 
 echo PHP_EOL;
 $a = array(0 => array('a'), 1 => array('b'));
 $b = array('0' => array('c'), '1' => array('b'));
-var_dump($a + $b);
-var_dump(array_merge($a, $b));
-echo '</pre>';
+print_r($a + $b);
