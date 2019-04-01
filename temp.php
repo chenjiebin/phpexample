@@ -1,25 +1,5 @@
 <?php
+echo 298674.65 + 16765 - 1400 -2200 - 200 - 260 - 85000 - 335 -1340 - 12000 - 3983.61;
 
-
-echo pow(10, 1000);
 echo PHP_EOL;
-exit();
-
-
-
-$GLOBALS['a'] = false;
-
-var_dump(!isset($GLOBALS['a']));
-
-a();
-a();
-a();
-a();
-
-function a()
-{
-    static $a = 0;
-    $a++;
-    echo $a;
-    echo '<br />';
-}
+echo 393539.98 + 16765 - 1400 - 2200 - 200 -260 -85000 - 335 -1340 -12000;
