@@ -17,7 +17,7 @@
 // 10个硬币, 5个朝上的几率
 // C(10, 5) / 2^10
 $case_count = 2;
-$total = 10;
+$total = 12;
 $sample_total_1 = 5;
 $sample_total_2 = $total - $sample_total_1;
 
