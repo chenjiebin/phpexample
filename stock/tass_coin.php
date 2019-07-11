@@ -37,7 +37,7 @@ function test()
         $sample_total_list[$v]++;
     }
 
-    $guess_total = 3;
+    $guess_total = 1000;
     $guess_success_total = 0;
     for ($i = 0; $i < $guess_total; $i++) {
         // 猜测下次出现什么情况
