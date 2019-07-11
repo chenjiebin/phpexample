@@ -87,7 +87,7 @@ function calcNextRate($case_count, $total, $sample_total_list)
         $sample_rate_percent = $sample_rate / $sample_rate_list_sum * 100;
         $sample_rate_percent_list[$case] = $sample_rate_percent;
     }
-    var_dump($sample_rate_percent_list);
+    var_dump('$sample_rate_percent_list', $sample_rate_percent_list);
     return $sample_rate_percent_list;
 }
 
