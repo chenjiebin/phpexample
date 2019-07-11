@@ -18,34 +18,31 @@
 // C(10, 5) / 2^10
 $case_count = 2;
 $total = 12;
-$sample_total_1 = 5;
-
-calcNextRate($case_count, $total, $sample_total_1);
+$sample_total_list = [5, 7];
+calcNextRate($case_count, $total, $sample_total_list);
 
 /**
  * 计算下一次出现的概率
- * @param $case_count
- * @param $total
- * @param $sample_total_1
+ * @param int $case_count 出现的样例情况次数, 比如掷硬币就只有正反两种情况
+ * @param int $total 实验总次数
+ * @param array $sample_total_list 实验结果出现次数列表 [$sample_total_1, $sample_total_2...]
  */
-function calcNextRate($case_count, $total, $sample_total_1)
+function calcNextRate($case_count, $total, $sample_total_list)
 {
-    $sample_total_2 = $total - $sample_total_1;
+    $sample_rate_list = [];
+    foreach ($sample_total_list as $sample_total) {
+        $sample_rate = calcRate($case_count, $total + 1, $sample_total + 1);
+        $sample_rate_list[] = $sample_rate;
+    }
+    var_dump($sample_rate_list);
 
-    $sample_1_rate = calcRate($case_count, $total + 1, $sample_total_1 + 1);
-    echo $sample_1_rate;
-    echo PHP_EOL;
-
-    $sample_2_rate = calcRate($case_count, $total + 1, $sample_total_2 + 1); // 另外一种情况概率
-    echo $sample_2_rate;
-    echo PHP_EOL;
-
-    $sample_1_rate_percent = $sample_1_rate / ($sample_1_rate + $sample_2_rate) * 100;
-    $sample_2_rate_percent = $sample_2_rate / ($sample_1_rate + $sample_2_rate) * 100;
-    echo '$sample_1_rate_percent: ' . $sample_1_rate_percent . '%';
-    echo PHP_EOL;
-    echo '$sample_2_rate_percent: ' . $sample_2_rate_percent . '%';
-    echo PHP_EOL;
+    $sample_rate_percent_list = [];
+    $sample_rate_list_sum = array_sum($sample_rate_list);
+    foreach ($sample_rate_list as $sample_rate) {
+        $sample_rate_percent = $sample_rate / $sample_rate_list_sum * 100;
+        $sample_rate_percent_list[] = $sample_rate_percent;
+    }
+    var_dump($sample_rate_percent_list);
 }
 
 /**
