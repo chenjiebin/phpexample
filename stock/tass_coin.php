@@ -38,17 +38,30 @@ function test()
     }
     var_dump($sample_total_list);
 
-
-    $next_rate_percent_list = calcNextRate($case_count, $total, $sample_total_list);
-    $guess_case = -1;
-    $temp_rate_percent = -1;
-    foreach ($next_rate_percent_list as $case => $next_rate_percent) {
-        if (bccomp($temp_rate_percent, $next_rate_percent, 2) === -1) {
-            $guess_case = $case;
-            $temp_rate_percent = $next_rate_percent;
+    $guess_total = 10000;
+    $guess_success_total = 0;
+    for ($i = 0; $i < $guess_total; $i++) {
+        // 猜测下次出现什么情况
+        $next_rate_percent_list = calcNextRate($case_count, $total, $sample_total_list);
+        $guess_case = -1;
+        $temp_rate_percent = -1;
+        foreach ($next_rate_percent_list as $case => $next_rate_percent) {
+            if (bccomp($temp_rate_percent, $next_rate_percent, 2) === -1) {
+                $guess_case = $case;
+                $temp_rate_percent = $next_rate_percent;
+            }
+        }
+        // 真实的随机
+        $real_case = mt_rand(1, 2);
+        echo $real_case;
+        echo PHP_EOL;
+        // 对比猜测和真实的
+        if (bccomp($guess_case, $real_case, 2) === 0) {
+            $guess_success_total++;
         }
     }
-    var_dump($guess_case);
+    echo '$guess_success_total:' . $guess_success_total . '';
+    echo PHP_EOL;
 }
 
 /**
@@ -65,7 +78,6 @@ function calcNextRate($case_count, $total, $sample_total_list)
         $sample_rate = calcRate($case_count, $total + 1, $sample_total + 1);
         $sample_rate_list[$case] = $sample_rate;
     }
-    var_dump($sample_rate_list);
 
     $sample_rate_percent_list = [];
     $sample_rate_list_sum = array_sum($sample_rate_list);
