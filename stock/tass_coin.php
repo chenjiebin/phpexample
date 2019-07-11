@@ -19,22 +19,28 @@
 $case_count = 2;
 $total = 12;
 $sample_total_1 = 5;
-$sample_total_2 = $total - $sample_total_1;
 
-$sample_1_rate = calcRate($case_count, $total + 1, $sample_total_1 + 1);
-echo $sample_1_rate;
-echo PHP_EOL;
+calcNextRate($case_count, $total, $sample_total_1);
 
-$sample_2_rate = calcRate($case_count, $total + 1, $sample_total_2 + 1); // 另外一种情况概率
-echo $sample_2_rate;
-echo PHP_EOL;
+function calcNextRate($case_count, $total, $sample_total_1)
+{
+    $sample_total_2 = $total - $sample_total_1;
 
-$sample_1_rate_percent = $sample_1_rate / ($sample_1_rate + $sample_2_rate) * 100;
-$sample_2_rate_percent = $sample_2_rate / ($sample_1_rate + $sample_2_rate) * 100;
-echo '$sample_1_rate_percent: ' . $sample_1_rate_percent . '%';
-echo PHP_EOL;
-echo '$sample_2_rate_percent: ' . $sample_2_rate_percent . '%';
-echo PHP_EOL;
+    $sample_1_rate = calcRate($case_count, $total + 1, $sample_total_1 + 1);
+    echo $sample_1_rate;
+    echo PHP_EOL;
+
+    $sample_2_rate = calcRate($case_count, $total + 1, $sample_total_2 + 1); // 另外一种情况概率
+    echo $sample_2_rate;
+    echo PHP_EOL;
+
+    $sample_1_rate_percent = $sample_1_rate / ($sample_1_rate + $sample_2_rate) * 100;
+    $sample_2_rate_percent = $sample_2_rate / ($sample_1_rate + $sample_2_rate) * 100;
+    echo '$sample_1_rate_percent: ' . $sample_1_rate_percent . '%';
+    echo PHP_EOL;
+    echo '$sample_2_rate_percent: ' . $sample_2_rate_percent . '%';
+    echo PHP_EOL;
+}
 
 /**
  * 计算组合数C($m, $n)
