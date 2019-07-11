@@ -1,5 +1,7 @@
 <?php
 
+// 计算富途牛牛费用
+
 $x = intval($_GET['x']); //每笔交易费用
 if (!$x) {
     die('x error');
