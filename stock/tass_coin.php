@@ -13,13 +13,18 @@
 //    echo PHP_EOL;
 //}
 
+
 // 10个硬币, 5个朝上的几率
 // C(10, 5) / 2^10
 $case_count = 2;
 $total = 10;
 $sample_total = 5;
-echo calcRate($case_count, $total, $sample_total);
+
+echo calcRate($case_count, $total + 1, $sample_total);
 echo PHP_EOL;
+
+//echo calcRate($case_count, $total + 1, $sample_total + 1);
+//echo PHP_EOL;
 
 
 /**
@@ -40,7 +45,9 @@ function combination($m, $n)
         $b[] = $i;
     }
     while ($a || $b) {
-        $result = $result * array_pop($a) / array_pop($b);
+        $temp_a = $a ? array_pop($a) : 1;
+        $temp_b = $b ? array_pop($b) : 1;
+        $result = $result * $temp_a / $temp_b;
     }
     return $result;
 }
