@@ -31,18 +31,17 @@ function test()
     }
 
     $case_count = 2;
-    $total = 1000;
+    $now_total = 1000;
     $sample_total_list = [1 => 0, 2 => 0];
     foreach ($array as $v) {
         $sample_total_list[$v]++;
     }
-    var_dump($sample_total_list);
 
     $guess_total = 10000;
     $guess_success_total = 0;
     for ($i = 0; $i < $guess_total; $i++) {
         // 猜测下次出现什么情况
-        $next_rate_percent_list = calcNextRate($case_count, $total, $sample_total_list);
+        $next_rate_percent_list = calcNextRate($case_count, $now_total, $sample_total_list);
         $guess_case = -1;
         $temp_rate_percent = -1;
         foreach ($next_rate_percent_list as $case => $next_rate_percent) {
@@ -53,12 +52,15 @@ function test()
         }
         // 真实的随机
         $real_case = mt_rand(1, 2);
-        echo $real_case;
-        echo PHP_EOL;
         // 对比猜测和真实的
         if (bccomp($guess_case, $real_case, 2) === 0) {
             $guess_success_total++;
         }
+
+        // 累加一下实验总数
+        $now_total += 1;
+        $sample_total_list[$real_case]++;
+
     }
     echo '$guess_success_total:' . $guess_success_total . '';
     echo PHP_EOL;
