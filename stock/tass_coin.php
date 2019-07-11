@@ -22,6 +22,12 @@ $sample_total_1 = 5;
 
 calcNextRate($case_count, $total, $sample_total_1);
 
+/**
+ * 计算下一次出现的概率
+ * @param $case_count
+ * @param $total
+ * @param $sample_total_1
+ */
 function calcNextRate($case_count, $total, $sample_total_1)
 {
     $sample_total_2 = $total - $sample_total_1;
