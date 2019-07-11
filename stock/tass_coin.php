@@ -16,26 +16,40 @@
 
 // 10个硬币, 5个朝上的几率
 // C(10, 5) / 2^10
-$case_count = 2;
-$total = 12;
-$sample_total_list = [1 => 5, 2 => 7];
-calcNextRate($case_count, $total, $sample_total_list);
+//$case_count = 2;
+//$total = 12;
+//$sample_total_list = [1 => 5, 2 => 7];
+//calcNextRate($case_count, $total, $sample_total_list);
 
-//function test()
-//{
-//    $array = [];
-//    for ($i = 0; $i < 1000; $i++) {
-//        $array[] = mt_rand(1, 2);
-//    }
-//
-//    $case_count = 2;
-//    $total = 1000;
-//    $sample_total_list = [1 => 0, 2 => 0];
-//    foreach ($array as $v) {
-//        $sample_total_list[$v]++;
-//    }
-//    $next_rate_list = calcNextRate($case_count, $total, $sample_total_list);
-//}
+test();
+
+function test()
+{
+    $array = [];
+    for ($i = 0; $i < 1000; $i++) {
+        $array[] = mt_rand(1, 2);
+    }
+
+    $case_count = 2;
+    $total = 1000;
+    $sample_total_list = [1 => 0, 2 => 0];
+    foreach ($array as $v) {
+        $sample_total_list[$v]++;
+    }
+    var_dump($sample_total_list);
+
+
+    $next_rate_percent_list = calcNextRate($case_count, $total, $sample_total_list);
+    $guess_case = -1;
+    $temp_rate_percent = -1;
+    foreach ($next_rate_percent_list as $case => $next_rate_percent) {
+        if (bccomp($temp_rate_percent, $next_rate_percent, 2) === -1) {
+            $guess_case = $case;
+            $temp_rate_percent = $next_rate_percent;
+        }
+    }
+    var_dump($guess_case);
+}
 
 /**
  * 计算下一次出现的概率
