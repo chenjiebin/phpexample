@@ -35,15 +35,12 @@ echo PHP_EOL;
  */
 function combination($m, $n)
 {
-    $result = 1;
-    $a = [];
-    for ($i = $m; $i > $n; $i--) {
-        $a[] = $i;
-    }
-    $b = [];
+    $a = $b = [];
     for ($i = 1; $i <= $n; $i++) {
+        $a[] = $m--;
         $b[] = $i;
     }
+    $result = 1;
     while ($a || $b) {
         $temp_a = $a ? array_pop($a) : 1;
         $temp_b = $b ? array_pop($b) : 1;
@@ -61,5 +58,7 @@ function combination($m, $n)
  */
 function calcRate($case_count, $total, $sample_total)
 {
-    return combination($total, $sample_total) / pow($case_count, $total);
+    $combination = combination($total, $sample_total);
+    $pow = pow($case_count, $total);
+    return $combination / $pow;
 }
