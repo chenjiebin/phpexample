@@ -37,7 +37,7 @@ function test()
         $sample_total_list[$v]++;
     }
 
-    $guess_total = 1000;
+    $guess_total = 30;
     $guess_success_total = 0;
     for ($i = 0; $i < $guess_total; $i++) {
         // 猜测下次出现什么情况
@@ -110,6 +110,8 @@ function combination($m, $n)
         $a[] = $m--;
         $b[] = $i;
     }
+//    echo '$a: ' . json_encode($a) . PHP_EOL;
+//    echo '$b: ' . json_encode($b) . PHP_EOL;
     $result = 1;
     while ($a || $b) {
         $temp_a = $a ? array_pop($a) : 1;
