@@ -37,7 +37,7 @@ function test()
         $sample_total_list[$v]++;
     }
 
-    $guess_total = 10000;
+    $guess_total = 3;
     $guess_success_total = 0;
     for ($i = 0; $i < $guess_total; $i++) {
         // 猜测下次出现什么情况
@@ -50,8 +50,12 @@ function test()
                 $temp_rate_percent = $next_rate_percent;
             }
         }
+        echo '$guess_case: ' . $guess_case . PHP_EOL;
+
         // 真实的随机
         $real_case = mt_rand(1, 2);
+        echo '$real_case: ' . $real_case . PHP_EOL;
+
         // 对比猜测和真实的
         if (bccomp($guess_case, $real_case, 2) === 0) {
             $guess_success_total++;
@@ -61,6 +65,7 @@ function test()
         $now_total += 1;
         $sample_total_list[$real_case]++;
 
+        echo PHP_EOL;
     }
     echo '$guess_success_total:' . $guess_success_total . '';
     echo PHP_EOL;
@@ -75,19 +80,20 @@ function test()
  */
 function calcNextRate($case_count, $total, $sample_total_list)
 {
+    echo json_encode(func_get_args()) . PHP_EOL;
     $sample_rate_list = [];
     foreach ($sample_total_list as $case => $sample_total) {
         $sample_rate = calcRate($case_count, $total + 1, $sample_total + 1);
         $sample_rate_list[$case] = $sample_rate;
     }
-
+    echo '$sample_rate_list: ' . json_encode($sample_rate_list) . PHP_EOL;
     $sample_rate_percent_list = [];
     $sample_rate_list_sum = array_sum($sample_rate_list);
     foreach ($sample_rate_list as $case => $sample_rate) {
         $sample_rate_percent = $sample_rate / $sample_rate_list_sum * 100;
         $sample_rate_percent_list[$case] = $sample_rate_percent;
     }
-    var_dump('$sample_rate_percent_list', $sample_rate_percent_list);
+    echo '$sample_rate_percent_list: ' . json_encode($sample_rate_percent_list) . PHP_EOL;
     return $sample_rate_percent_list;
 }
 
