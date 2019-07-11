@@ -20,13 +20,17 @@ echo PHP_EOL;
 
 function combination($m, $n)
 {
-    $a = 1;
+    $result = 1;
+    $a = [];
     for ($i = $m; $i > $n; $i--) {
-        $a *= $i;
+        $a[] = $i;
     }
-    $b = 1;
+    $b = [];
     for ($i = 1; $i <= $n; $i++) {
-        $b *= $i;
+        $b[] = $i;
     }
-    return $a / $b;
+    while ($a || $b) {
+        $result = $result * array_pop($a) / array_pop($b);
+    }
+    return $result;
 }
