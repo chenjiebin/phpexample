@@ -84,6 +84,7 @@ function calcNextRate($case_count, $total, $sample_total_list)
     $sample_rate_list = [];
     foreach ($sample_total_list as $case => $sample_total) {
         $sample_rate = calcRate($case_count, $total + 1, $sample_total + 1);
+        echo '$sample_rate: ' . $sample_rate . PHP_EOL;
         $sample_rate_list[$case] = $sample_rate;
     }
     echo '$sample_rate_list: ' . json_encode($sample_rate_list) . PHP_EOL;
@@ -131,6 +132,8 @@ function combination($m, $n)
 function calcRate($case_count, $total, $sample_total)
 {
     $combination = combination($total, $sample_total);
+    echo '$combination: ' . $combination . PHP_EOL;
     $pow = gmp_pow($case_count, $total);
-    return $combination / $pow;
+    echo '$pow: ' . $pow . PHP_EOL;
+    return gmp_div($combination, $pow, 2);
 }
