@@ -7,13 +7,16 @@ echo gmp_pow(2, 31);
 echo PHP_EOL;
 
 
-echo $a = combination(1024, 500);
+echo $a = combination(1024, 600);
 echo PHP_EOL;
 
 echo $b = gmp_pow(2, 1024);
 echo PHP_EOL;
 
 echo gmp_div($a, $b, GMP_ROUND_MINUSINF);
+echo PHP_EOL;
+
+echo large_num_div($a, $b);
 echo PHP_EOL;
 
 
@@ -42,3 +45,21 @@ function combination($m, $n)
 }
 
 
+function large_num_div($a, $b)
+{
+    $a_len = strlen($a);
+    $b_len = strlen($b);
+    $sub_len = min($a_len, $b_len);
+    $temp_a_int = substr($a, 0, $a_len - $sub_len + 1);
+    $temp_a_float = substr($a, $a_len - $sub_len + 1, 2);
+    $temp_a =  $temp_a_int . '.' . $temp_a_float;
+    echo $temp_a;
+    echo PHP_EOL;
+
+    $temp_b_int = substr($b, 0, $b_len - $sub_len + 1);
+    $temp_b_float = substr($b, $b_len - $sub_len + 1, 2);
+    $temp_b =  $temp_b_int . '.' . $temp_b_float;
+    echo $temp_b;
+    echo PHP_EOL;
+    exit();
+}
