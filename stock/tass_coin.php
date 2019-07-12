@@ -116,7 +116,7 @@ function combination($m, $n)
     while ($a || $b) {
         $temp_a = $a ? array_pop($a) : 1;
         $temp_b = $b ? array_pop($b) : 1;
-        $result = bcdiv(bcmul($result, $temp_a, 2), $temp_b, 2);
+        $result = gmp_div(gmp_mul($result, $temp_a), $temp_b);
     }
     return $result;
 }
@@ -131,6 +131,6 @@ function combination($m, $n)
 function calcRate($case_count, $total, $sample_total)
 {
     $combination = combination($total, $sample_total);
-    $pow = pow($case_count, $total);
+    $pow = gmp_pow($case_count, $total);
     return $combination / $pow;
 }
