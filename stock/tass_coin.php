@@ -116,7 +116,7 @@ function combination($m, $n)
     while ($a || $b) {
         $temp_a = $a ? array_pop($a) : 1;
         $temp_b = $b ? array_pop($b) : 1;
-        $result = $result * $temp_a / $temp_b;
+        $result = bcdiv(bcmul($result, $temp_a, 2), $temp_b, 2);
     }
     return $result;
 }
