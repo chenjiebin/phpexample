@@ -16,6 +16,9 @@ foreach ($arr as $v) {
     }
     $item = explode("\t", $v);
     print_r($item);
+    if (count($item) < 7) {
+        continue;
+    }
     $value = 0;
     if (strpos($item['5'], 'M') !== false) {
         $value = intval($item[5]) * 1000;
