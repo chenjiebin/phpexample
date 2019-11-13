@@ -15,19 +15,27 @@ foreach ($arr as $v) {
         continue;
     }
     $item = explode("\t", $v);
-    $value = intval($item[5]);
-    if (strpos($item['5'], 'M') !== 0) {
-        $value = intval($item[5]) * 1000;
-    }
     print_r($item);
+    $value = 0;
+    if (strpos($item['5'], 'M') !== false) {
+        $value = intval($item[5]) * 1000;
+    } else if (strpos($item['5'], 'K') !== false) {
+        $value = intval($item[5]);
+    }
+    echo "value:" . $value;
+    echo PHP_EOL;
     if ($item['6'] == '-') { // 没有成交价
         continue;
     }
+    $money = $value * $item[6];
+    echo "money:" . $money;
+    echo PHP_EOL;
     if ($item['2'] == '牛') {
-        $niu_xiong_bi['niu'] += $value * $item[6];
+        $niu_xiong_bi['niu'] += $money;
     } else {
-        $niu_xiong_bi['xiong'] += $value * $item[6];
+        $niu_xiong_bi['xiong'] += $money;
     }
+    echo PHP_EOL;
 }
 print_r($niu_xiong_bi);
 
