@@ -5,7 +5,8 @@
 
 $niu_xiong_bi = ['niu_value' => 0, 'xiong_value' => 0]; // 单位k
 
-$content = file_get_contents('800000.txt');
+$content = file_get_contents('800000.csv');
+$content =  mb_convert_encoding($content, 'utf8', 'utf16');
 $arr = explode("\n", $content);
 $i = 0;
 foreach ($arr as $v) {
